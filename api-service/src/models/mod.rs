@@ -111,6 +111,7 @@ impl<T> ApiResponse<T> {
         }
     }
 
+    #[allow(dead_code)]
     pub fn error(message: &str) -> ApiResponse<()> {
         ApiResponse {
             success: false,

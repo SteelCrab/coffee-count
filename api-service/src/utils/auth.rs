@@ -44,6 +44,7 @@ pub struct UserInfo {
 
 pub struct AuthenticatedUser {
     pub user_id: Uuid,
+    #[allow(dead_code)]
     pub user: UserInfo,
 }
 

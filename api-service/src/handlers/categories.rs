@@ -1,9 +1,8 @@
 // Simplified categories handler for testing
 use axum::{
-    extract::{Path, Query, State},
     http::StatusCode,
     response::Json,
-    routing::{get, post},
+    routing::get,
     Router,
 };
 use serde::{Deserialize, Serialize};
@@ -27,20 +26,6 @@ pub struct CreateCategoryRequest {
     pub color: String,
     pub unit: String,
     pub default_amount: f64,
-}
-
-#[derive(Debug, Deserialize)]
-pub struct UpdateCategoryRequest {
-    pub name: Option<String>,
-    pub icon: Option<String>,
-    pub color: Option<String>,
-    pub unit: Option<String>,
-    pub default_amount: Option<f64>,
-}
-
-#[derive(Deserialize)]
-pub struct CategoryQuery {
-    pub active_only: Option<bool>,
 }
 
 // Routes function
