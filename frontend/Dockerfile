@@ -10,16 +10,11 @@ COPY package*.json ./
 # Install all dependencies (including dev dependencies for build)
 RUN npm ci
 
-# Copy public folder explicitly
-COPY public/ ./public/
+# Copy all source files (excluding what's in .dockerignore)
+COPY . .
 
-# Copy source code
-COPY src/ ./src/
-
-# Copy configuration files
-COPY tsconfig.json ./
-COPY postcss.config.js ./
-COPY tailwind.config.js ./
+# Verify public folder exists
+RUN ls -la public/ || echo "Public folder not found"
 
 # Build the application
 RUN npm run build
