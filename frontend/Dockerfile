@@ -4,14 +4,22 @@ FROM node:18-alpine AS builder
 # Set working directory
 WORKDIR /app
 
-# Copy package files
+# Copy package files first for better caching
 COPY package*.json ./
 
 # Install all dependencies (including dev dependencies for build)
 RUN npm ci
 
+# Copy public folder explicitly
+COPY public/ ./public/
+
 # Copy source code
-COPY . .
+COPY src/ ./src/
+
+# Copy configuration files
+COPY tsconfig.json ./
+COPY postcss.config.js ./
+COPY tailwind.config.js ./
 
 # Build the application
 RUN npm run build
