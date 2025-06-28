@@ -13,9 +13,6 @@ RUN npm ci
 # Copy all source files (excluding what's in .dockerignore)
 COPY . .
 
-# Verify public folder exists
-RUN ls -la public/ || echo "Public folder not found"
-
 # Build the application
 RUN npm run build
 
