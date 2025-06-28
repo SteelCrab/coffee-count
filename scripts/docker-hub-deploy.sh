@@ -142,23 +142,6 @@ if [ "$VERSION" = "latest" ]; then
     create_versioned_tag "auth-service"
     create_versioned_tag "api-service"
 fi
-    
-    # Auth Service versioned
-    versioned_image="${DOCKER_HUB_USERNAME}/${PROJECT_NAME}-auth-service:${VERSION_TAG}"
-    echo -e "${BLUE}🏷️  Tagging: coffee-counter-microservices-auth-service -> ${versioned_image}${NC}"
-    docker tag "coffee-counter-microservices-auth-service" "${versioned_image}"
-    echo -e "${BLUE}⬆️  Pushing: ${versioned_image}${NC}"
-    docker push "${versioned_image}"
-    echo -e "${GREEN}✅ Successfully pushed ${versioned_image}${NC}"
-    
-    # API Service versioned
-    versioned_image="${DOCKER_HUB_USERNAME}/${PROJECT_NAME}-api-service:${VERSION_TAG}"
-    echo -e "${BLUE}🏷️  Tagging: coffee-counter-microservices-api-service -> ${versioned_image}${NC}"
-    docker tag "coffee-counter-microservices-api-service" "${versioned_image}"
-    echo -e "${BLUE}⬆️  Pushing: ${versioned_image}${NC}"
-    docker push "${versioned_image}"
-    echo -e "${GREEN}✅ Successfully pushed ${versioned_image}${NC}"
-fi
 
 echo -e "${GREEN}🎉 All images successfully deployed to Docker Hub!${NC}"
 echo ""
