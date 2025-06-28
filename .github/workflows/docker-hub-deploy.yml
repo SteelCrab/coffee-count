@@ -8,8 +8,8 @@ on:
     branches: [ main, master ]
 
 env:
-  DOCKER_HUB_USERNAME: ${{ vars.DOCKER_HUB_USERNAME }}
-  PROJECT_NAME: ${{ vars.PROJECT_NAME }}
+  DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+  PROJECT_NAME: coffee-counter
 
 jobs:
   build-and-deploy:
