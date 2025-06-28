@@ -3,6 +3,8 @@ use axum::{
     extract::{Path, Query, State},
     http::StatusCode,
     response::Json,
+    routing::{get, post},
+    Router,
 };
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
@@ -39,6 +41,12 @@ pub struct UpdateCategoryRequest {
 #[derive(Deserialize)]
 pub struct CategoryQuery {
     pub active_only: Option<bool>,
+}
+
+// Routes function
+pub fn routes() -> Router {
+    Router::new()
+        .route("/", get(get_categories).post(create_category))
 }
 
 // Mock handlers for testing
