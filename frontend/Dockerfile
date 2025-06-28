@@ -10,10 +10,8 @@ COPY package*.json ./
 # Install all dependencies (including dev dependencies for build)
 RUN npm ci
 
-# Copy public folder and source code
-COPY public/ ./public/
-COPY src/ ./src/
-COPY tsconfig.json postcss.config.js tailwind.config.js ./
+# Copy source code
+COPY . .
 
 # Build the application
 RUN npm run build
