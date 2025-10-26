@@ -1,10 +1,5 @@
 // Simplified categories handler for testing
-use axum::{
-    http::StatusCode,
-    response::Json,
-    routing::get,
-    Router,
-};
+use axum::{http::StatusCode, response::Json, routing::get, Router};
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
@@ -28,10 +23,23 @@ pub struct CreateCategoryRequest {
     pub default_amount: f64,
 }
 
+#[derive(Debug, Deserialize, Default)]
+pub struct UpdateCategoryRequest {
+    pub name: Option<String>,
+    pub icon: Option<String>,
+    pub color: Option<String>,
+    pub unit: Option<String>,
+    pub default_amount: Option<f64>,
+}
+
+#[derive(Debug, Deserialize, Default)]
+pub struct CategoryQuery {
+    pub active_only: Option<bool>,
+}
+
 // Routes function
 pub fn routes() -> Router {
-    Router::new()
-        .route("/", get(get_categories).post(create_category))
+    Router::new().route("/", get(get_categories).post(create_category))
 }
 
 // Mock handlers for testing
@@ -110,7 +118,9 @@ mod tests {
         let query = CategoryQuery { active_only: None };
         assert_eq!(query.active_only.unwrap_or(true), true);
 
-        let query = CategoryQuery { active_only: Some(false) };
+        let query = CategoryQuery {
+            active_only: Some(false),
+        };
         assert_eq!(query.active_only.unwrap_or(true), false);
     }
 
@@ -118,7 +128,7 @@ mod tests {
     async fn test_get_categories_handler() {
         let result = get_categories().await;
         assert!(result.is_ok());
-        
+
         let categories = result.unwrap().0;
         assert_eq!(categories.len(), 0); // Empty mock response
     }
